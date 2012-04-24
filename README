@@ -1,0 +1,13 @@
+# halleck
+
+writes quotes to your log file
+
+## Usage
+
+replace the log4j FileAppender with halleck.Appender
+
+## License
+
+Copyright (C) 2012 Kevin Downey
+
+Distributed under the Eclipse Public License, the same as Clojure.
