@@ -38,7 +38,7 @@
           buffered-io
           buf-size)]))
 
-(defn clone-event [event & {:keys [message level]}]
+(defn clone-event [event & {:keys [message level throw-info]}]
   (org.apache.log4j.spi.LoggingEvent.
    (.getFQNOfLoggerClass event)
    (.getLogger event)
@@ -46,7 +46,7 @@
    (or level (.getLevel event))
    (or message (.getMessage event))
    (.getThreadName event)
-   (.getThrowableInformation event)
+   (or throw-info (.getThrowableInformation event))
    (.getNDC event)
    (.getLocationInformation event)
    (.getProperties event)))
@@ -112,6 +112,7 @@
       (.doAppend (.state this)
                  (clone-event
                   event
+                  :throw-info nil
                   :message
                   (str "\n" (random-fortune))))
       (catch Exception _))))
