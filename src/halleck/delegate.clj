@@ -43,4 +43,5 @@
                     i x]
                 i))
        ~@(for [[n impl] (group-by second funs)]
-           `(defn ~n ~@(map #(nth % 2) impl))))))
+           `(defn ~n ~@(for [[args & body] (map (comp rest rest) impl)]
+                         `(~args ~@body)))))))
